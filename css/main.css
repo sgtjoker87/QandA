@@ -5,6 +5,20 @@ body {
 h1, h2, h3 {
     font-family: 'Archivo Narrow', sans-serif;
 }
+#content {
+    position:fixed;
+    background-color:#cccccc;
+    display:block;
+}
+#menu {
+    position:fixed;
+    top:1;
+    left:-250px;
+    width:250px;
+    height:480px;
+    display:block;
+    background-color:#868686;
+}
 .banner {
     background-color: #C0C0C0;
     color: #000000;

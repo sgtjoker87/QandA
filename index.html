@@ -9,8 +9,6 @@
 
 	<!-- INCLUDE APPLICATION SPECIFIC CSS AND JAVASCRIPT -->
 	
-	
-	
 	<link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.firebase.com/js/client/1.0.6/firebase.js"></script>
     <!-- AngularJS -->
@@ -21,45 +19,67 @@
 </head>
 <body>
 
-    <div class='banner'>
-        <div class='container'>
-            <h1>Q & A</h1>
-            <div class="search-box row-fluid form-inline">
-			<label>Filter:</label>
-			<input type="text" ng-model="filterText"</div>
+    <div id="content">
+        <div class='banner'>
+            <div class='container'>
+                <h1 onclick="showMenu();">Q & A</h1>
+                <div class="search-box row-fluid form-inline">
+    			<label>Filter:</label>
+    			<input type="text" ng-model="filterText"</div>
+            </div>
         </div>
+    	<div class="container main-frame" ng-app="QandAapp" ng-controller="mainController" ng-init="init()">
+
+            <div class="results-top"></div>
+            <div class="results-container">
+                <ul class="question-list">
+                	<!-- <li ng-repeat="Questions in results"> -->
+        <div class="row-fluid">
+            <div class="span3">
+             
+                <div class="ratings"><strong>Ratings:</strong> <span class="label"><i class="icon-thumbs-up"></i> {{questions.questions.Q1.A1.ratings.loved}}</span> <span class="label"><i class="icon-thumbs-down"></i> {{questions.questions.Q1.A1.ratings.hated}}</span> </div>
+            </div>
+            <div class="span6">
+                <h3>{{questions.questions.Q1.Q}}: {{questions.questions.Q1.A1.A}}</h3>
+                <p>{{questions.questions.Q1.A1.A}}</p>
+            </div>
+            <div class="span3">
+                <div class="fulldate pull-right label label-info">{{questions.questions.Q1.date}}</div>
+                <ul class="show-info">
+                    <li><strong>On Air:</strong> {{questions.questions.Q1.A1.air_day}} </li>
+                    <li><strong>Portal:</strong> {{questions.questions.Q1.portal}}</li>
+                    <li><strong>Tags:</strong> <span class="label label-inverse genre" ng-repeat="genre in questions.Q1.tags">{{tags}}</span></li>
+                </ul>
+            </div>
+        </div>
+    <!-- </li> --></ul>
+            </div>
+            <div class="results-bottom"></div>
+    	</div>
     </div>
-	<div class="container main-frame" ng-app="QandAapp" ng-controller="mainController" ng-init="init()">
 
-        <div class="results-top"></div>
-        <div class="results-container">
-            <ul class="question-list">
-            	<!-- <li ng-repeat="Questions in results"> -->
-    <div class="row-fluid">
-        <div class="span3">
-         
-            <div class="ratings"><strong>Ratings:</strong> <span class="label"><i class="icon-thumbs-up"></i> {{questions.questions.Q1.A1.ratings.loved}}</span> <span class="label"><i class="icon-thumbs-down"></i> {{questions.questions.Q1.A1.ratings.hated}}</span> </div>
-        </div>
-        <div class="span6">
-            <h3>{{questions.questions.Q1.Q}}: {{questions.questions.Q1.A1.A}}</h3>
-            <p>{{questions.questions.Q1.A1.A}}</p>
-        </div>
-        <div class="span3">
-            <div class="fulldate pull-right label label-info">{{questions.questions.Q1.date}}</div>
-            <ul class="show-info">
-                <li><strong>On Air:</strong> {{questions.questions.Q1.A1.air_day}} </li>
-                <li><strong>Portal:</strong> {{questions.questions.Q1.portal}}</li>
-                <li><strong>Tags:</strong> <span class="label label-inverse genre" ng-repeat="genre in questions.Q1.tags">{{tags}}</span></li>
-            </ul>
-        </div>
-    </div>
-<!-- </li> --></ul>
-        </div>
-        <div class="results-bottom"></div>
-	</div>
+    <div id="menu">I am a menu <button onclick="hideMenu();">close</button></div>
 
+    <script>
+    var m=document.getElementById('menu');
+    var c=document.getElementById('content');
+    function showMenu(){
+        if(m.offsetLeft<0){
+            m.style.left=(m.offsetLeft+10)+'px';
+            c.style.left=(c.offsetLeft+10)+'px';
+            setTimeout(showMenu,16)
+        }
 
+    }
+    function hideMenu(){
+        if(m.offsetLeft>-250){
+            m.style.left=(m.offsetLeft-10)+'px';
+            c.style.left=(c.offsetLeft-10)+'px';
+            setTimeout(hideMenu,16)
+        }
 
+    }
+    </script>
     <script src="js/angular.min.js"></script>
 </body>
 </html>
