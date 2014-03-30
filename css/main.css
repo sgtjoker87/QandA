@@ -12,10 +12,7 @@ h1, h2, h3 {
 }
 #menu {
     position:fixed;
-    top:1;
     left:-250px;
-    width:250px;
-    height:480px;
     display:block;
     background-color:#868686;
 }

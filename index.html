@@ -21,8 +21,10 @@
 
     <div id="content">
         <div class='banner'>
-            <div class='container'>
-                <h1 onclick="showMenu();">Q & A</h1>
+            <div class='container' ng-controller="mainController">
+                <h1 onclick="showMenu();">
+                    <img src="/img/main_logo.png" height="100" width="100"/>
+                </h1>
                 <div class="search-box row-fluid form-inline">
     			<label>Filter:</label>
     			<input type="text" ng-model="filterText"</div>
@@ -58,7 +60,11 @@
     	</div>
     </div>
 
-    <div id="menu">I am a menu <button onclick="hideMenu();">close</button></div>
+    <div id="menu" ng-app="QandAapp" ng-controller="mainController">
+        <button class="btn-large">Sign up</button>
+        <br/>
+        <button class="btn-large" onclick="hideMenu();">close</button>
+    </div>
 
     <script>
     var m=document.getElementById('menu');
