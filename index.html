@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Q & A</title>
+	<!-- INCLUDE REQUIRED THIRD PARTY LIBRARY JAVASCRIPT AND CSS -->
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+
+	<!-- INCLUDE APPLICATION SPECIFIC CSS AND JAVASCRIPT -->
+	
+	
+	
+	<link rel="stylesheet" href="css/main.css">
+    <script src="https://cdn.firebase.com/js/client/1.0.6/firebase.js"></script>
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+    <script type="text/javascript" src="js/qandaapp/app.js"></script>
+	<script type="text/javascript" src="js/qandaapp/controllers/mainController.js"></script>
+</head>
+<body>
+
+    <div class='banner'>
+        <div class='container'>
+            <h1>Q & A</h1>
+            <div class="search-box row-fluid form-inline">
+			<label>Filter:</label>
+			<input type="text" ng-model="filterText"</div>
+        </div>
+    </div>
+	<div class="container main-frame" ng-app="QandAapp" ng-controller="mainController" ng-init="init()">
+
+        <div class="results-top"></div>
+        <div class="results-container">
+            <ul class="question-list">
+            	<!-- <li ng-repeat="Questions in results"> -->
+    <div class="row-fluid">
+        <div class="span3">
+         
+            <div class="ratings"><strong>Ratings:</strong> <span class="label"><i class="icon-thumbs-up"></i> {{questions.questions.Q1.A1.ratings.loved}}</span> <span class="label"><i class="icon-thumbs-down"></i> {{questions.questions.Q1.A1.ratings.hated}}</span> </div>
+        </div>
+        <div class="span6">
+            <h3>{{questions.questions.Q1.Q}}: {{questions.questions.Q1.A1.A}}</h3>
+            <p>{{questions.questions.Q1.A1.A}}</p>
+        </div>
+        <div class="span3">
+            <div class="fulldate pull-right label label-info">{{questions.questions.Q1.date}}</div>
+            <ul class="show-info">
+                <li><strong>On Air:</strong> {{questions.questions.Q1.A1.air_day}} </li>
+                <li><strong>Portal:</strong> {{questions.questions.Q1.portal}}</li>
+                <li><strong>Tags:</strong> <span class="label label-inverse genre" ng-repeat="genre in questions.Q1.tags">{{tags}}</span></li>
+            </ul>
+        </div>
+    </div>
+<!-- </li> --></ul>
+        </div>
+        <div class="results-bottom"></div>
+	</div>
+
+
+
+    <script src="js/angular.min.js"></script>
+</body>
+</html>
