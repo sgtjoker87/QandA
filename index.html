@@ -9,6 +9,8 @@
 
 	<!-- INCLUDE APPLICATION SPECIFIC CSS AND JAVASCRIPT -->
 	
+	
+    <link rel="stylesheet" type="text/css" href="css/assets/jquery.gridster.css">
 	<link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.firebase.com/js/client/1.0.6/firebase.js"></script>
     <!-- AngularJS -->
@@ -16,76 +18,101 @@
     <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
     <script type="text/javascript" src="js/qandaapp/app.js"></script>
 	<script type="text/javascript" src="js/qandaapp/controllers/mainController.js"></script>
+
 </head>
 <body>
 
-    <div id="content">
-        <div class='banner'>
-            <div class='container' ng-controller="mainController">
-                <h1 onclick="showMenu();">
-                    <img src="/img/main_logo.png" height="100" width="100"/>
-                </h1>
-                <div class="search-box row-fluid form-inline">
-    			<label>Filter:</label>
-    			<input type="text" ng-model="filterText"</div>
-            </div>
+    <div class='banner'>
+        <div class='container'>
+            <h1>Q & A</h1>
         </div>
-    	<div class="container main-frame" ng-app="QandAapp" ng-controller="mainController" ng-init="init()">
+    </div>
+	<div class="container main-frame" ng-app="QandAapp" ng-controller="mainController" ng-init="init()">
+        <div class="search-box row-fluid form-inline">
+            <label>Filter:</label>
+            <input type="text" ng-model="filterText">
+            <label>Network: </label>
+            <select ng-model="networkFilter" ng-options="label for label in availableNetwork">
+                 <option value="">QandA</option>
+            </select>
+            <label>Order by: </label>
+                <select ng-model="orderReverse"class="input-medium">
+              <option value="true">Popular</option>
+               <option value="false">Newest</option>
+            </select>
+            <a class="list-icon pull-right" ng-class="{active: layout == 'list'}" ng-click="layout = 'list'"></a>
+            <a class="grid-icon pull-right" ng-class="{active: layout == 'grid'}" ng-click="layout = 'grid'"></a>
+        </div>
 
-            <div class="results-top"></div>
-            <div class="results-container">
-                <ul class="question-list">
-                	<!-- <li ng-repeat="Questions in results"> -->
-        <div class="row-fluid">
-            <div class="span3">
-             
-                <div class="ratings"><strong>Ratings:</strong> <span class="label"><i class="icon-thumbs-up"></i> {{questions.questions.Q1.A1.ratings.loved}}</span> <span class="label"><i class="icon-thumbs-down"></i> {{questions.questions.Q1.A1.ratings.hated}}</span> </div>
-            </div>
-            <div class="span6">
-                <h3>{{questions.questions.Q1.Q}}: {{questions.questions.Q1.A1.A}}</h3>
-                <p>{{questions.questions.Q1.A1.A}}</p>
-            </div>
-            <div class="span3">
-                <div class="fulldate pull-right label label-info">{{questions.questions.Q1.date}}</div>
-                <ul class="show-info">
-                    <li><strong>On Air:</strong> {{questions.questions.Q1.A1.air_day}} </li>
-                    <li><strong>Portal:</strong> {{questions.questions.Q1.portal}}</li>
-                    <li><strong>Tags:</strong> <span class="label label-inverse genre" ng-repeat="genre in questions.Q1.tags">{{tags}}</span></li>
+        <div class="results-top"></div>
+        <div class="results-container">
+            <ul class="question-list">
+                <!-- <li ng-repeat="Questions in results"> -->
+               <div class="row-fluid">
+                
+
+                   <ul ng-show="layout == 'grid'" class="grid">
+                    
+                    <div class="span7">
+                    <li ng-repeat="q in questions">
+                          <ul class="question-info">
+                            <h3><strong>{{q.Q}}</strong></h3> 
+                            <p>asked by Bhanu Peddi <span class="circular pull-right"><img src="http://www.ideachampions.com/weblogs/strange-albert-einstein.jpg"  /></span></p>
+                            <h3>{{q.Q.A1.A}}</h3>
+                          </ul>
+                        </li>
+                      
+                      <li ng-repeat="q in questions">
+                          <ul class="question-info">
+                            <h3><strong>{{q.Q}}</strong></h3> 
+                            <p>asked by Bhanu Peddi <span class="circular pull-right"><img src="http://www.ideachampions.com/weblogs/strange-albert-einstein.jpg"  /></span></p>
+                          </ul>
+                        </li></div>
+                    <div class="span4" > 
+                      <!-- A view with big photos and no text -->
+                     <li ng-repeat="q in questions">
+                       <ul class="impquestion-info">
+                          <h3><strong>{{q.Q}}</strong></h3> 
+                          <p>asked by Bhanu Peddi <span class="circular pull-right"><img src="http://www.ideachampions.com/weblogs/strange-albert-einstein.jpg"  /></span></p>
+                       </ul>
+                     </li>
+                    </div>
+                </ul>
+            
+        
+        
+                <ul ng-show="layout == 'list'" class="list">
+                  <!-- A compact view smaller photos and titles -->
+                  <div class="span3"></div>
+                  <div class="span7">
+                    <li ng-repeat="q in questions">
+                       <ul class="impquestion-info">
+                          <h3><strong>{{q.Q}}</strong></h3> 
+                          <p> asked by Bhanu Peddi<span class="circular pull-left"><img src="http://www.ideachampions.com/weblogs/strange-albert-einstein.jpg"  /></span></p>
+                          <h3>{{q.Q.A1.A}}</h3>
+                       </ul>
+                     </li>
+                   <li ng-repeat="q in questions">
+                     <ul class="question-info">
+                       <h3><strong>{{q.Q}}</strong></h3> 
+                       <p>asked by Bhanu Peddi <span class="circular pull-right"><img src="http://www.ideachampions.com/weblogs/strange-albert-einstein.jpg"  /></span></p>
+                       <h3>{{q.Q.A1.A}}</h3>
+                     </ul>
+                   </li>
+                  </div>
+                  <div class="span2" style="background-color:#000000 border:solid 1px red"></div>
                 </ul>
             </div>
-        </div>
-    <!-- </li> --></ul>
-            </div>
-            <div class="results-bottom"></div>
-    	</div>
+        </ul>
     </div>
 
-    <div id="menu" ng-app="QandAapp" ng-controller="mainController">
-        <button class="btn-large">Sign up</button>
-        <br/>
-        <button class="btn-large" onclick="hideMenu();">close</button>
-    </div>
+        
+        <div class="results-bottom"></div>
+        
+    
+	</div>
 
-    <script>
-    var m=document.getElementById('menu');
-    var c=document.getElementById('content');
-    function showMenu(){
-        if(m.offsetLeft<0){
-            m.style.left=(m.offsetLeft+10)+'px';
-            c.style.left=(c.offsetLeft+10)+'px';
-            setTimeout(showMenu,16)
-        }
-
-    }
-    function hideMenu(){
-        if(m.offsetLeft>-250){
-            m.style.left=(m.offsetLeft-10)+'px';
-            c.style.left=(c.offsetLeft-10)+'px';
-            setTimeout(hideMenu,16)
-        }
-
-    }
-    </script>
-    <script src="js/angular.min.js"></script>
+    
+    
 </body>
 </html>
